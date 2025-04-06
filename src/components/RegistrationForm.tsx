@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { UserPlus, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { supabase } from '../lib/supabase';
+import { motion } from 'framer-motion';
+import { SuccessToast } from './SucessToast.tsx';
 
 interface FormData {
   fullName: string;
@@ -21,6 +23,7 @@ export function RegistrationForm() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
 
   const validateField = (name: keyof FormData, value: string) => {
@@ -94,6 +97,8 @@ export function RegistrationForm() {
       }
 
       toast.success('Inscrição realizada com sucesso!');
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
       setFormData({ fullName: '', phone: '' });
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
@@ -109,7 +114,16 @@ export function RegistrationForm() {
   };
 
   return (
-      <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      <motion.form
+          onSubmit={handleSubmit}
+          className="space-y-6"
+          noValidate
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+      >
+        <SuccessToast show={showSuccess} message="Inscrição realizada com sucesso!" />
+
         <div>
           <label htmlFor="fullName" className="block text-sm font-medium text-gray-300">
             Nome Completo
@@ -120,7 +134,7 @@ export function RegistrationForm() {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className={`mt-1 block w-full rounded-md shadow-sm bg-gray-700 border-gray-600 text-gray-100 ${
+              className={`mt-1 block w-full rounded-lg shadow-sm bg-gray-700 border-gray-600 text-gray-100 transition duration-200 ${
                   errors.fullName
                       ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
                       : 'focus:border-blue-500 focus:ring-blue-500'
@@ -146,7 +160,7 @@ export function RegistrationForm() {
               value={formData.phone}
               onChange={handleChange}
               placeholder="(99) 99999-9999"
-              className={`mt-1 block w-full rounded-md shadow-sm bg-gray-700 border-gray-600 text-gray-100 ${
+              className={`mt-1 block w-full rounded-lg shadow-sm bg-gray-700 border-gray-600 text-gray-100 transition duration-200 ${
                   errors.phone
                       ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
                       : 'focus:border-blue-500 focus:ring-blue-500'
@@ -162,30 +176,30 @@ export function RegistrationForm() {
         </div>
 
         <div className="space-y-4">
-          <button
+          <motion.button
               type="submit"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               disabled={isSubmitting || Object.keys(errors).length > 0}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex justify-center items-center gap-2 py-2 px-4 border border-transparent rounded-lg shadow-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           >
-            {isSubmitting ? (
-                'Enviando...'
-            ) : (
-                <>
-                  <UserPlus className="w-5 h-5 mr-2" />
-                  Realizar Inscrição
-                </>
-            )}
-          </button>
+            {isSubmitting ? 'Enviando...' : <>
+              <UserPlus className="w-5 h-5" />
+              Realizar Inscrição
+            </>}
+          </motion.button>
 
-          <button
+          <motion.button
               type="button"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               onClick={handleAdminLoginRedirect}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="w-full flex justify-center items-center gap-2 py-2 px-4 border border-transparent rounded-lg shadow-md text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-200"
           >
-            <Lock className="w-5 h-5 mr-2" />
+            <Lock className="w-5 h-5" />
             Login Administrativo
-          </button>
+          </motion.button>
         </div>
-      </form>
+      </motion.form>
   );
 }
