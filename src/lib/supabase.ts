@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 
+
 if (!import.meta.env.VITE_SUPABASE_URL) {
   throw new Error('VITE_SUPABASE_URL is not defined');
 }

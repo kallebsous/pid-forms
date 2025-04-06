@@ -26,7 +26,7 @@ function App() {
               <div className="max-w-md mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-8">
                   <img
-                      src="https://raw.githubusercontent.com/your-repo/pid-logo.png"
+                      src="/logo-pid.png"
                       alt="PID Logo"
                       className="h-16 mx-auto mb-4"
                   />
