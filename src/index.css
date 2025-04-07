@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .neon-border {
+        @apply border-2 border-blue-500 shadow-lg shadow-blue-500/50;
+        animation: neonPulse 1.5s infinite;
+    }
+    .neon-zap {
+        @apply border-2 border-green-300 shadow-green-500/50;
+        animation: neonPulse 1.5s infinite;
+    }
+
+    /* Modo escuro */
+    .dark .neon-border {
+        @apply border-2 border-rose-700 shadow-lg shadow-rose-700/50;
+        animation: neonPulseDark 1.5s infinite;
+    }
+
+    /* Animação para o modo claro (azul) */
+    @keyframes neonPulse {
+        0% {
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        50% {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.8);
+        }
+        100% {
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+    }
+
+    /* Animação para o modo escuro (rose-700) */
+    @keyframes neonPulseDark {
+        0% {
+            box-shadow: 0 0 5px rgba(190, 18, 60, 0.5), 0 0 10px rgba(190, 18, 60, 0.5);
+        }
+        50% {
+            box-shadow: 0 0 20px rgba(190, 18, 60, 0.8), 0 0 30px rgba(190, 18, 60, 0.8);
+        }
+        100% {
+            box-shadow: 0 0 5px rgba(190, 18, 60, 0.5), 0 0 10px rgba(190, 18, 60, 0.5);
+        }
+    }
+}

@@ -4,6 +4,7 @@ import { Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../lib/supabase';
+import {motion} from "framer-motion";
 
 export function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -54,10 +55,10 @@ export function AdminLogin() {
   };
 
   return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-100">
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-black dark:text-white">
               Acesso Administrativo
             </h2>
           </div>
@@ -73,7 +74,7 @@ export function AdminLogin() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-500 text-gray-100 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-gray-800"
+                    className="appearance-none mt-1 relative block w-full border border-gray-700 placeholder-gray-500 text-black dark:text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-gray-300 dark:bg-blue-300 px-3 py-2 rounded-full shadow-sm"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -89,7 +90,7 @@ export function AdminLogin() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-500 text-gray-100 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-gray-800"
+                    className="appearance-none mt-1 relative block w-full border border-gray-700 placeholder-gray-500 text-black focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-gray-300 dark:bg-blue-300 px-3 py-2 rounded-full shadow-sm"
                     placeholder="Senha"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -108,8 +109,18 @@ export function AdminLogin() {
               </span>
                 {isLoading ? 'Entrando...' : 'Entrar'}
               </button>
+
             </div>
           </form>
+          <motion.button
+              type="button"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/')}
+              className="w-full flex justify-center items-center gap-2 py-2 px-4 border border-transparent rounded-lg shadow-md text-sm font-medium text-black dark:text-white bg-gradient-to-bl hover:bg-rose-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-200"
+          >
+            Voltar
+          </motion.button>
         </div>
       </div>
   );
