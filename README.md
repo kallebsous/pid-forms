@@ -144,4 +144,4 @@ Este projeto está licenciado sob a MIT License.
 
 - Autor: Kalleb Sousa
 - GitHub: https://github.com/kallebsous
-- Email: \[insira seu email, se desejar\]
+- Email: \[kallebaraujo8@gmail.com\]
